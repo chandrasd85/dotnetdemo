@@ -1,0 +1,22 @@
+FROM node:16-alpine
+
+# Create a non-root user
+RUN adduser --disabled-password myuser
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the application files
+COPY . .
+
+# Install application dependencies
+RUN npm install
+
+# Set environment variables
+ENV NODE_ENV=production
+
+# Switch to the non-root user
+USER myuser
+
+# Specify the command to start the application
+CMD [ "npm", "start" ]
