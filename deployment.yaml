@@ -1,21 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: dotnetdemo
+  namespace: chandu
   labels:
-    app: nginx
+    app: dotnetdemo
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: dotnetdemo
   template:
     metadata:
       labels:
-        app: nginx
+        app: dotnetdemo
     spec:
       containers:
-      - name: nginx
-        image: chandrasd85/dotnetdemo:2.0
+      - name: dotnetdemo
+        image: testacr6666.azurecr.io/dotnetdemo:1.0
         ports:
-        - containerPort: 8080
+        - containerPort: 5000
+      imagePullSecrets:
+      - name: testacr6666
