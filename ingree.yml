@@ -1,0 +1,35 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: IngressName
+  namespace: default
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ServiceName
+            port:
+              number: 80
+
+      - path: /careers
+        pathType: Prefix
+        backend:
+          service:
+            name: carrerservice
+            port:
+              number: 80          
+
+      - path: /staffing
+        pathType: Prefix
+        backend:
+          service:
+            name: /staffingservice
+            port:
+              number: 80         
