@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  walmartpayment-dev
+  name: walmartpayment-dev
   namespace: walmartdev
   labels:
-    app:  walmartpayment-dev
+    app: walmartpayment-dev
 spec:
   selector:
     matchLabels:
@@ -18,19 +18,19 @@ spec:
   template:
     metadata:
       labels:
-        app:  walmartpayment-dev
+        app: walmartpayment-dev
     spec:
       containers:
-      - name:  walmartpayment-dev
-        image:  bermtecacrshared.azurecr.io/bermtecpayment:latest
+      - name: walmartpayment-dev
+        image: bermtecacrshared.azurecr.io/bermtecpayment:latest
         resources:
           requests:
-            cpu:  100m
+            cpu: 100m
             memory: 300Mi
           limits:
             cpu: 200m
             memory: 300Mi
-        livenessProbe: # up and running i.e continuous up and running 
+        livenessProbe:
           exec:
             command:
             - ls
@@ -39,7 +39,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
           periodSeconds: 10
-        readinessProbe: # to be used to make sure pods runing
+        readinessProbe:
           httpGet:
             path: /_status/healthz
             port: 80
@@ -50,12 +50,12 @@ spec:
           periodSeconds: 10
         env:
         - name: DB_HOST
-        valueFrom:
-          secretKeyKeyRef:
-             name: walmartpayment-dev
-             key: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: walmartpayment-dev
+              key: DB_HOST
         ports:
-        - containerPort:  80
-          name:  walmartdev
+        - containerPort: 80
+          name: walmartdev
         imagePullPolicy: Always
       restartPolicy: Always
