@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: chandrasddotnetdemo 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chandrasddotnetdemo
+  template:
+    metadata:
+      labels:
+        app: chandrasddotnetdemo 
+    spec:
+      containers:
+        - name: chandrasddotnetdemo 
+          image: dotnet123.azurecr.io/chandrasddotnetdemo
+          ports:
+          - containerPort: 9000
